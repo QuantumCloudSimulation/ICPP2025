@@ -51,13 +51,17 @@ qcloudsimenv = QCloudSimEnv(
     devices=devices,
     broker_class=ParallelBroker,
     job_feed_method="dispatcher",
-    file_path="synth_job_batches/1000-large-circuits.csv",
-    allocation_mode='smart',
-    printlog=True
+    file_path="synth_job_batches/20-large-circuits.csv",
+    allocation_mode='speed',
+    printlog=False
 )
 qcloudsimenv.run()
 ```
+After the simulation is completed, job records can be accessed by running the following code. 
 
+```
+job_records = qcloudsimenv.job_records_manager.get_job_records()
+```
 
 ⸻
 
@@ -65,7 +69,7 @@ qcloudsimenv.run()
 
 You can visualize the fidelity distribution for different allocation modes using matplotlib:
 ```python
-plt.hist(fidelity_list['smart'], bins=10, color='pink', edgecolor='black', alpha=0.7, label='EASM')
+plt.hist(fidelity_list['speed'], bins=10, color='pink', edgecolor='black', alpha=0.7, label='EASM')
 plt.xlabel("Fidelity")
 plt.ylabel("Frequency")
 plt.legend(loc='upper left')
